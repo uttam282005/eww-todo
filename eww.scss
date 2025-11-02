@@ -1,0 +1,167 @@
+/* ~/.config/eww/eww.scss */
+
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
+}
+
+/* Container */
+.todo-container {
+  background-color: rgba(30, 30, 46, 0.95);
+  border-radius: 12px;
+  padding: 15px;
+  border: 2px solid rgba(137, 180, 250, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Header */
+.todo-header {
+  padding: 5px 0 10px 0;
+  border-bottom: 2px solid rgba(137, 180, 250, 0.2);
+  margin-bottom: 10px;
+}
+
+.todo-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #cdd6f4;
+  flex: 1;
+}
+
+.todo-count {
+  background-color: rgba(137, 180, 250, 0.2);
+  color: #89b4fa;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Task list */
+.todo-list {
+  min-height: 50px;
+}
+
+.todo-item-box {
+  background-color: rgba(49, 50, 68, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: all 0.2s ease;
+}
+
+.todo-item-box:hover {
+  background-color: rgba(49, 50, 68, 0.9);
+  transform: translateX(3px);
+}
+
+/* Checkbox */
+.todo-checkbox {
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  background-color: rgba(137, 180, 250, 0.1);
+  border: 2px solid #89b4fa;
+  color: #89b4fa;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.todo-checkbox:hover {
+  background-color: rgba(137, 180, 250, 0.3);
+  transform: scale(1.1);
+}
+
+.todo-checkbox.completed {
+  background-color: #a6e3a1;
+  border-color: #a6e3a1;
+  color: #1e1e2e;
+}
+
+/* Task text */
+.todo-text {
+  color: #cdd6f4;
+  flex: 1;
+  padding: 0 8px;
+}
+
+.completed-text {
+  color: #6c7086;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Remove button */
+.remove-btn {
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  background-color: rgba(243, 139, 168, 0.1);
+  color: #f38ba8;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+  transform: scale(1.1);
+}
+
+/* Input section */
+.todo-input-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid rgba(137, 180, 250, 0.2);
+}
+
+.task-entry {
+  flex: 1;
+  min-width: 200px;
+  background-color: rgba(49, 50, 68, 0.8);
+  color: #cdd6f4;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid rgba(137, 180, 250, 0.3);
+  caret-color: #89b4fa;
+}
+
+.task-entry:focus {
+  border-color: #89b4fa;
+  background-color: rgba(49, 50, 68, 1);
+  outline: none;
+}
+
+/* Add button */
+.add-btn {
+  min-width: 36px;
+  min-height: 36px;
+  background-color: #89b4fa;
+  color: #1e1e2e;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.add-btn:hover {
+  background-color: #b4befe;
+  transform: scale(1.05);
+}
+
+/* Clear completed button */
+.clear-completed-btn {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: rgba(243, 139, 168, 0.1);
+  color: #f38ba8;
+  border-radius: 8px;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.clear-completed-btn:hover {
+  background-color: rgba(243, 139, 168, 0.3);
+}

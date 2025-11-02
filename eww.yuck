@@ -1,0 +1,99 @@
+;; ~/.config/eww/eww.yuck
+
+;; --- Variables ---
+(deflisten tasks :initial "[]"
+  "bash ~/.config/eww/scripts/get_tasks.sh")
+
+(defvar show-todo false)
+(defvar new-task "")
+
+;; --- Widgets ---
+(defwidget todo-item [task]
+  (box
+    :class "todo-item-box"
+    :orientation "h"
+    :space-evenly false
+    :spacing 8
+    (button
+      :class "todo-checkbox ${task.completed ? 'completed' : ''}"
+      :onclick "bash ~/.config/eww/scripts/toggle_task.sh ${task.id}"
+      (label :text "${task.completed ? '✓' : '○'}"))
+    (label 
+      :class "todo-text ${task.completed ? 'completed-text' : ''}"
+      :text "${task.text}"
+      :limit-width 25
+      :wrap false)
+    (button
+      :class "remove-btn"
+      :onclick "bash ~/.config/eww/scripts/remove_task.sh ${task.id}"
+      (label :text "×"))))
+
+(defwidget todo-widget []
+  (box
+    :class "todo-container"
+    :orientation "v"
+    :space-evenly false
+    :spacing 10
+    
+    ;; Header
+    (box 
+      :class "todo-header"
+      :orientation "h"
+      :space-evenly false
+      (label :text "📋 TODO" :class "todo-title")
+      (label :text "${arraylength(tasks)}" :class "todo-count"))
+    
+    ;; Task list
+    (scroll
+      :height 300
+      :vscroll true
+      (box 
+        :class "todo-list"
+        :orientation "v"
+        :space-evenly false
+        :spacing 5
+        (for task in tasks
+          (todo-item :task task))))
+    
+    ;; Input section
+    ;; Bind the input value (no per-keystroke `:onchange`) so
+    ;; typing doesn't re-render the input, but we can clear it after
+    ;; pressing Enter with `eww update new-task=''`.
+    (box 
+      :class "todo-input-section"
+      :orientation "h"
+      :space-evenly false
+      :spacing 5
+      (input 
+        :class "task-entry"
+        :value new-task
+        :focusable true 
+        :onaccept "bash ~/.config/eww/scripts/add_task.sh '{}'; eww update new-task=''")
+      ;; + button removed on user request
+      )
+    
+    ;; Clear completed button
+    (button
+      :class "clear-completed-btn"
+      :onclick "bash ~/.config/eww/scripts/clear_completed.sh"
+      (label :text "Clear Completed"))))
+
+;; --- Window ---
+(defwindow todo-window
+  :monitor 0
+  :geometry (geometry 
+    :x "20px"
+    :y "40px"
+    :width "320px"
+    :height "260px"
+    :anchor "top right")
+  ;; Use foreground stacking and a normal window type; some WMs ignore
+  ;; dialog/wm-ignore layer hints (especially on Wayland). Using a
+  ;; normal, undecorated window in the foreground often behaves like a
+  ;; floating panel across more compositors.
+  :stacking "fg"
+  :windowtype "normal"
+  :focusable true
+  :wm-ignore true
+  :decorated false
+  (todo-widget))
